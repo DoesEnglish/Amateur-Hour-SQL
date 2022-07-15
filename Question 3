@@ -1,0 +1,72 @@
+#Third question in the leetcode series. 
+#I'm now realizing that because I use MYSQL I actually hadn't considered people might be doing these in another style.
+# Will update the README explaining that I'm writing all this code in the MYSQL format. 
+#Anyway, here's the question. 
+#-------------------------------------------------------------------------------
+#SQL SCHEMA
+Create table If Not Exists Customer (id int, name varchar(25), referee_id int)
+Truncate table Customer
+insert into Customer (id, name, referee_id) values ('1', 'Will', 'None')
+insert into Customer (id, name, referee_id) values ('2', 'Jane', 'None')
+insert into Customer (id, name, referee_id) values ('3', 'Alex', '2')
+insert into Customer (id, name, referee_id) values ('4', 'Bill', 'None')
+insert into Customer (id, name, referee_id) values ('5', 'Zack', '1')
+insert into Customer (id, name, referee_id) values ('6', 'Mark', '2')
+#------------------------------------------------------------------------------
+Table: Customer
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
+| referee_id  | int     |
++-------------+---------+
+id is the primary key column for this table.
+Each row of this table indicates the id of a customer, their name, and the id of the customer who referred them.
+ 
+
+Write an SQL query to report the names of the customer that are not referred by the customer with id = 2.
+
+Return the result table in any order.
+
+The query result format is in the following example.
+
+ 
+
+Example 1:
+
+Input: 
+Customer table:
++----+------+------------+
+| id | name | referee_id |
++----+------+------------+
+| 1  | Will | null       |
+| 2  | Jane | null       |
+| 3  | Alex | 2          |
+| 4  | Bill | null       |
+| 5  | Zack | 1          |
+| 6  | Mark | 2          |
++----+------+------------+
+Output: 
++------+
+| name |
++------+
+| Will |
+| Jane |
+| Bill |
+| Zack |
++------+
+
+#-----------------------------------------------------------------------------------------
+# I actually hadn't used IS NULL or IS NOT NULL in MYSQL yet and totally didn't realize I could use it like this. Cool.
+SELECT name FROM customer WHERE referee_id !=2 OR referee_id IS NULL;
+
+#This code had a 362ms runtime which was better than 99.87% of accepted code. Slowest runtime of exact same code was over 1000ms. 
+
+
+
+
+
+
+
